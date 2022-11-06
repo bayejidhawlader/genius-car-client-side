@@ -4,9 +4,7 @@ import router from "./Router/Routes/Routes";
 
 function App() {
   return (
-    <div>
-      <button className="btn">Button</button>
-      <button className="btn btn-primary">Button</button>
+    <div className="max-w-screen-xl mx-auto	">
       <RouterProvider router={router}></RouterProvider>
     </div>
   );
