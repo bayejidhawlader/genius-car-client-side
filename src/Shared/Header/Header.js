@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import websiteLogo from "../../assets/logo.svg";
+import { AuthContext } from "../../contex/AuthProvider/AuthProvider";
 
 const Header = () => {
+  const user = useContext(AuthContext);
   const menuItems = (
     <>
-      <li>
+      <li className="font-semibold">
         <Link to="/">Home</Link>
       </li>
+      {user?.email ? (
+        <>
+          <li className="font-semibold">
+            <Link to="/orders">Orders</Link>
+          </li>
+        </>
+      ) : (
+        <li className="font-semibold">
+          <Link to="/login">Login</Link>
+        </li>
+      )}
     </>
   );
   return (
@@ -37,7 +50,7 @@ const Header = () => {
             {menuItems}
           </ul>
         </div>
-        <Link tp="/" className="btn btn-ghost normal-case text-xl">
+        <Link to="/" className="btn btn-ghost normal-case text-xl">
           <img src={websiteLogo} alt="" />
         </Link>
       </div>
@@ -45,7 +58,7 @@ const Header = () => {
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
       </div>
       <div className="navbar-end">
-        <button className="btn btn-outline btn-error rounded-none">
+        <button className="btn btn-outline btn-error rounded-none ">
           Appinment
         </button>
       </div>
