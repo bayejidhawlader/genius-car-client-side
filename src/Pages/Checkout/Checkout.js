@@ -1,10 +1,15 @@
 import React, { useContext } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contex/AuthProvider/AuthProvider";
 
 const Checkout = () => {
   const { _id, title, price } = useLoaderData();
   const { user } = useContext(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/orders";
 
   const handlePlaceOrder = (event) => {
     event.preventDefault();
@@ -32,6 +37,7 @@ const Checkout = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("genius-token")}`,
       },
       body: JSON.stringify(order),
     })
@@ -42,6 +48,7 @@ const Checkout = () => {
           alert("Order Plased Successfuly");
           form.reset();
         }
+        navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));
   };
