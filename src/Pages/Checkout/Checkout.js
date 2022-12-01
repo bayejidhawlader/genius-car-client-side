@@ -33,7 +33,7 @@ const Checkout = () => {
     //   alert("Phone number should be 10 Carecter or longer");
     // }else{}
 
-    fetch("http://localhost:5000/orders", {
+    fetch("https://genius-car-server-rho-rust.vercel.app/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",
